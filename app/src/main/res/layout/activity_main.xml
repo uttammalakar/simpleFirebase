@@ -19,6 +19,7 @@
         android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="number"
         android:hint="taka"/>
     <Button
         android:id="@+id/save"
@@ -26,6 +27,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="save"
+        />
+    <Button
+        android:id="@+id/show"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="show"
         />
 
 
