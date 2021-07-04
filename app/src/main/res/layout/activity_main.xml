@@ -7,15 +7,16 @@
     android:orientation="vertical"
     android:padding="10dp"
     tools:context=".MainActivity">
+
     <EditText
-        android:id="@+id/product"
+        android:id="@+id/productEditText"
         android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="add product"
         />
     <EditText
-        android:id="@+id/amount"
+        android:id="@+id/priceEditText"
         android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

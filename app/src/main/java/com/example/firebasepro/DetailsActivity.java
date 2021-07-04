@@ -15,20 +15,22 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TotalActivity extends AppCompatActivity {
-   private ListView listView;
+public class DetailsActivity extends AppCompatActivity {
+    ListView listView;
     DatabaseReference databaseReference;
     private List<DataBase> dataBaseList;
-    private Customadafter customadafter;
+    private CustomAdafter customAdafter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_total);
+        setContentView(R.layout.activity_details);
+        listView=findViewById(R.id.listviewid);
         databaseReference= FirebaseDatabase.getInstance().getReference("market");
         dataBaseList=new ArrayList<>();
-        customadafter=new Customadafter(TotalActivity.this,dataBaseList);
-        listView=findViewById(R.id.listviewid);
+        customAdafter=new CustomAdafter(DetailsActivity.this,dataBaseList);
+
     }
 
     @Override
@@ -36,18 +38,15 @@ public class TotalActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                dataBaseList.clear();
-                for (DataSnapshot dataSnapshot1:snapshot.getChildren())
-                {
-                    DataBase dataBase=dataSnapshot1.getValue(DataBase.class);
+                for (DataSnapshot dataSnapshot:snapshot.getChildren()){
+
+                    DataBase dataBase=dataSnapshot.getValue(DataBase.class);
                     dataBaseList.add(dataBase);
 
                 }
-                listView.setAdapter(customadafter);
-               }
+                listView.setAdapter(customAdafter);
 
-
-
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

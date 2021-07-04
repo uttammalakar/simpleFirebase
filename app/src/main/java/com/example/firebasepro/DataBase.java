@@ -3,10 +3,7 @@ package com.example.firebasepro;
 public class DataBase {
     private String name;
     private String price;
-    public DataBase(){
 
-
-    }
 
     public DataBase(String name, String price) {
         this.name = name;
@@ -27,5 +24,8 @@ public class DataBase {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public DataBase() {
     }
 }
