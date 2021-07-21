@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,13 +21,14 @@ public class DetailsActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     private List<DataBase> dataBaseList;
     private CustomAdafter customAdafter;
-
+TextView to;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
         listView=findViewById(R.id.listviewid);
+        to=findViewById(R.id.total);
         databaseReference= FirebaseDatabase.getInstance().getReference("market");
         dataBaseList=new ArrayList<>();
         customAdafter=new CustomAdafter(DetailsActivity.this,dataBaseList);
@@ -35,6 +37,10 @@ public class DetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
+
+         Double[] total = {0.0};
+       // double total=0.0;
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -42,6 +48,10 @@ public class DetailsActivity extends AppCompatActivity {
 
                     DataBase dataBase=dataSnapshot.getValue(DataBase.class);
                     dataBaseList.add(dataBase);
+
+                    total[0] = total[0] + Double.parseDouble(dataBase.getPrice());
+
+                    to.setText( String.valueOf(total[0]) );
 
                 }
                 listView.setAdapter(customAdafter);
@@ -53,6 +63,9 @@ public class DetailsActivity extends AppCompatActivity {
 
             }
         });
+
+
+
         super.onStart();
     }
 }
